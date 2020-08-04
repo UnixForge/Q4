@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Object Prototypes | COMP1073 Client-Side JavaScript</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="css/normalize.css" rel="stylesheet" />
+	<link href="css/styles.css" rel="stylesheet" />
+	<script src="facts.js" async></script>
+</head>
+
+<body>
+	<!-- STEP 1: Build out a HEADER and a SECTION element -->
+	<header>
+
+	</header>
+	<section>
+		
+	</section>
+	<footer>
+
+	</footer>
+	<script>
+		/* STEP 2: Bind the HEADER and the SECTION elements above to variables */
+		let header = document.querySelector('header');
+		let section = document.querySelector('section');
+		let div1 = document.querySelector('section');
+		let div2 = document.querySelectorAll('div')[1];
+
+		// STEP 3 - Store JSON URL in a variable
+
+		let requestURL = 'https://jessicagilfillan.github.io/Final_Exam_Prep/Q3/cats.json';
+
+		//Step 4 - Create a new XHR object 
+		let request = new XMLHttpRequest(); 
+
+		// open a new request using the open method of XHR object 
+		request.open('GET', requestURL); 
+		//set up the response type 
+
+		request.responseType = 'json'; 
+
+		//send the request 
+		request.send();
+
+		//set up an event handler to listen for onload, so we don't do anything until the data return 
+		request.onload = function() {
+			let call = request.response; 
+			console.log(call);
+			cat(call); 
+		}
+
+		function cat(jsonObj) {
+			let cats = jsonObj['cats']; 
+			for(let i = 0; i < cats.length; i++) {
+				let article = document.createElement('article');
+				let h1 = document.createElement('h1');
+				let h2 = document.createElement('h2');
+				let p1 = document.createElement('p'); 
+				let p2 = document.createElement('p'); 
+				let p3 = document.createElement('p'); 
+				let list = document.createElement('ul'); 
+
+				h2.textContent = cats[i].name;
+				p3.textContent = cats[i].age; 
+				p1.textContent = cats[i].species;
+				p2.textContent = cats[i].favFoods; 
+				
+				
+				let features = topDeals[i].features;
+				for(let j = 0; j < features.length; j++ ) {
+					let listItem = document.createElement('li'); 
+					listItem.textContent = features[j]; 
+					list.appendChild(listItem); 
+				}
+				
+			
+				article.appendChild(h2); 
+				article.appendChild(p1); 
+				article.appendChild(p2); 
+				article.appendChild(p3); 
+				article.appendChild(list); 
+				section.appendChild(article); 
+			}
+		}
+		
+		// This page inspired by and adapted from https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON
+		</script>
+	</body>
+</html>
